@@ -1,0 +1,38 @@
+import nodemailer from 'nodemailer'
+
+const user = "saadaoui.med90@gmail.com";
+const pass = "ljkipknmxwsjdipa";
+
+const transport = nodemailer.createTransport({
+    service : 'gmail',
+    auth:{
+        user: user,
+        pass: pass,
+    },
+    port : 465,
+    host : "smtp.gmail.com"
+})
+
+
+const sendConfirmationMail =async (firstName,lastName,email,password) =>{
+    transport.sendMail({
+        from : user,
+        to : email,
+        subject : 'Welcome',
+        html : `
+        <div>
+        <h1>Login to platform</h1>
+        <h2> Hi ${firstName} ${lastName}</h2>
+        <p> To login to your account use the email and password below :</p>
+        <ul>
+        <li>Email : ${email}</li>
+        <li>Password : ${password}</li>
+        </ul>
+        </div>
+        `
+    })
+    .catch((err) => console.log(err))
+}
+
+
+export {sendConfirmationMail}

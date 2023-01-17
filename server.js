@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import userRouter from './routers/userRoute.js'
 import leaveRouter from './routers/leaveRoute.js'
+import adminRouter from './routers/adminRoute.js'
 
 
 
@@ -14,7 +15,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 app.use(bodyParser.json())
 app.use(express.json())
+app.use('/static',express.static('images'))
 app.use('/api',userRouter)
+app.use('/api',adminRouter)
 app.use('/api',leaveRouter)
 
 /***** to fix deprecationwarning mongoose the strict query */

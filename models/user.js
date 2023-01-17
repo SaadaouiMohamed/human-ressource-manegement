@@ -4,6 +4,11 @@ import bcrypt from 'bcryptjs'
 
 const userSchema = mongoose.Schema(
  {
+    departmentId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref : "Department",
+        required:false,
+    },
     firstName:{
         type:String,
         required:true,
@@ -11,6 +16,20 @@ const userSchema = mongoose.Schema(
     lastName:{
         type:String,
         required:true,
+    },
+    gender:{
+        type:String,
+        required:false,    
+    },
+    dateOfBirth:{
+        type:Date,
+        default : Date.now,
+        required:false,    
+    },
+    dateOfJoin:{
+        type:Date,
+        default : Date.now,
+        required:false,    
     },
     email:{
         type:String,
@@ -25,18 +44,16 @@ const userSchema = mongoose.Schema(
         type:String,
         required:true,
     },
-    telNum:{
+    phone:{
         type:Number,
         required:true,
     },
     post:{
         type:String,
         required:false,
+        enum : ["STAFF", "TEAM LEAD", "ADMIN"]
     },
-    //  leavesReq:[{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:"Leave",
-    // }],
+   
     soldOfLeaves : {
         type : Number,
         default : 25,

@@ -7,7 +7,7 @@ const leaveSchema = mongoose.Schema({
   },
   type: {
     type: String,
-    // enum: ["congée annuelle", "congée de maladie", "télétravail"],
+     enum: ["congée annuelle", "congée de maladie", "télétravail"],
   },
   startDate: {
     type: Date,
@@ -19,8 +19,9 @@ const leaveSchema = mongoose.Schema({
     type: Number,
   },
   adminResponse: {
-    type: Boolean,
-    default: false,
+    type: String,
+    enum: ["Pending", "Rejected", "Approved"],
+    default: "Pending",
   }
 },
   {
@@ -28,6 +29,6 @@ const leaveSchema = mongoose.Schema({
   });
 
 
-  const Leave = mongoose.model('Leave' , leaveSchema)
+  const Leave = mongoose.model('Leave' , leaveSchema) 
 
   export default Leave;

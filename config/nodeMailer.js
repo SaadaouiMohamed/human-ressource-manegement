@@ -35,4 +35,22 @@ const sendConfirmationMail =async (firstName,lastName,email,password) =>{
 }
 
 
-export {sendConfirmationMail}
+
+const sendResetPassword = async(email,randomCode) =>{
+    transport.sendMail({
+        from: user,
+      to: email,
+      subject: "Demande reinitialisation du mot de passe  ",
+      html: `
+      <div>
+      <h1> Réinitialisation du mot de passe </h1>
+      
+        <p>reinitialiser votre  mot de passe en cliquant sur le lien suivant
+</p>
+        <p> votre nouvelle password : ${randomCode}</p>
+
+        </div>`,
+    })
+}
+
+export {sendConfirmationMail, sendResetPassword}

@@ -28,6 +28,48 @@ res.status(201).json({message : 'leave request added successfuly'})
 })
 
 
+/*********************** Leave Admin lists ********************/
+
+const leavesAdminList = asyncHandler((async(req,res) =>{
+    const leaves = await Leave.find({adminResponse:"Pending"})
+    if(leaves){
+        res.status(201).json({leaves})
+    }
+    res.status(401).send("no leaves request")
+}))
 
 
-export {requestLeave}
+
+
+/************************* employee leave lists ***************/
+
+
+const employeeLeaves = asyncHandler(async(req,res) =>{
+    const user = await User.findById(req.params.id)
+    const leaves = await Leave.find({employeeId : req.params.id})
+    
+    if(leaves){
+        res.status(201).json({leaves:leaves,user:user})
+    } 
+    res.status(401).send('the leave list is empty')
+ }) 
+
+
+
+ /******************************** admin response ****************************/
+
+
+ const addAdminResponse = asyncHandler(async(req,res) =>{
+    const response = await Leave.findById(req.params.id)
+    
+    if(response){
+        response.adminResponse = req.body.adminResponse
+        const updateResponse =await response.save()
+       return res.status(201).json({responseLeave:updateResponse,message:'admin response updated'})
+        
+    }
+    res.status(404).json({err:'leave request not found'})
+ })
+
+
+export {requestLeave,leavesAdminList,employeeLeaves, addAdminResponse}

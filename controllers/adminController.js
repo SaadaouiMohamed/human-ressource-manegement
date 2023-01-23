@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 })
 
 
-const upload = multer({storage:storage}).any()
+const upload = multer({storage:storage}).single('file')
 
 
 const uploadFile = asyncHandler(async(req,res) => {
@@ -167,7 +167,7 @@ const editUser = asyncHandler(async(req,res) => {
     } else{
         res.status(404).json({err:'User not found'})
     }
-    })
+    }) 
     
     
     /*************** delete user *****************/

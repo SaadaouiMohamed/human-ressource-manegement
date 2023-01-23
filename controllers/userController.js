@@ -45,7 +45,7 @@ const authUser = asyncHandler(async(req,res)=>{
 
 
 const getUserProfile = asyncHandler(async(req,res) => {
-    const user = await User.findById(req.params.id).populate()
+    const user = await User.findById(req.params.id)
     if(user){
         res.json({user:user})
     } else {
@@ -59,7 +59,7 @@ const getUserProfile = asyncHandler(async(req,res) => {
 const editUser = asyncHandler(async(req,res) => {
     const user = await User.findById(req.params.id)
     if(user){
-        user.departmentId = req.body.departmentId || user.departmentId
+        user.departmentId = req.body.departmentId || user.departmentId 
         user.firstName = req.body.firstName || user.firstName
         user.lastName = req.body.lastName || user.lastName
         user.gender = req.body.gender || user.gender
@@ -73,7 +73,7 @@ const editUser = asyncHandler(async(req,res) => {
         if(req.body.password){
         user.password = req.body.password
         }
-        const updateUser = await user.save()
+        const updateUser = await user.save() 
         
         res.status(200).json({
             _id:updateUser._id,
@@ -95,7 +95,7 @@ const editUser = asyncHandler(async(req,res) => {
     const resetPass = asyncHandler(async(req, res) =>{
         const user =await User.findOneAndUpdate(
             {email : req.body.email},
-            { resetPass : randomCode()},
+            { resetPass : randomCode().password},
            {
             new : true
            }

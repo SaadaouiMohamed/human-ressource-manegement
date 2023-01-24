@@ -6,6 +6,7 @@ import mongoose from 'mongoose'
 import userRouter from './routers/userRoute.js'
 import leaveRouter from './routers/leaveRoute.js'
 import adminRouter from './routers/adminRoute.js'
+import permissionRouter from './routers/permissionRoute.js'
 
 
 
@@ -19,7 +20,7 @@ app.use('/static',express.static('images'))
 app.use('/api',userRouter)
 app.use('/api',adminRouter)
 app.use('/api',leaveRouter)
-
+app.use('/api',permissionRouter)
 /***** to fix deprecationwarning mongoose the strict query */
 mongoose.set('strictQuery', false)
 
